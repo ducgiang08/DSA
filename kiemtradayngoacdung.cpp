@@ -1,27 +1,43 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int main(){
-	int T; cin >> T;
-	while (T--){
-		cin.ignore();
-		string S;
-		getline (cin, S);
-		stack <char> st;
-		for (char x : S){
-			if (x == '(' || x == '[' || x == '{') st.push(x);
+void solve(string S){
+	stack<char> st;
+	if(S.empty()) {
+		cout << "NO";
+		return;
+	}
+	else {
+		for(auto x : S){
+			if(x == '{' || x == '[' || x == '(') st.push(x);
 			else {
-				if(st.empty()){
-					cout << "NO" << endl;
-					break;
+				if (st.empty()) {
+					cout << "NO";
+					return;
 				}
 				else {
-					st.pop();
+					auto top = st.top();
+					if ((x=='}'&&top=='{') || (x==']'&&top=='[') || (x==')'&&top=='(')) st.pop();
+					else {
+						cout << "NO";
+						return;
+					}
 				}
 			}
 		}
-		if (st.empty()) cout << "YES" << endl;
-		else cout << "NO" << endl;
+		if (st.empty()) cout << "YES";
+	}
+}
+
+int main(){
+	int T;
+	cin >> T;
+	while (T--){
+		string S;
+		cin.ignore();
+		getline(cin, S);
+		solve(S) ;
+		cout << endl;
 	}
 	return 0;
 }

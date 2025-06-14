@@ -16,7 +16,6 @@ int main(){
 		while (E--){
 			cin >> u >> v;
 			a[u].push_back(v);
-			a[v].push_back(u);
 		}
 		queue<int> qu;
 		qu.push(s); chuaxet[s] = false;
